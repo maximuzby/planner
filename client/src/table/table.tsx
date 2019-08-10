@@ -3,6 +3,7 @@ import React from 'react';
 
 import { useStore } from '../use-store';
 import { DayCell } from './cells/day-cell';
+import { PersonCell } from './cells/person-cell';
 import './table.css';
 
 export const Table = () => {
@@ -27,10 +28,8 @@ export const Table = () => {
 					</th>
 				</tr>
 				{store.people.map(person => (
-					<tr className='planner-table__row' key={person.name}>
-						<td className='planner-cell planner-cell_person'>
-							{person.name}
-						</td>
+					<tr className='planner-table__row' key={person.id}>
+						<PersonCell person={person} />
 						{store.days.map(day => (
 							<td
 								className='planner-cell planner-cell_task'

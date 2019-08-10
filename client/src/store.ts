@@ -8,8 +8,6 @@ export interface PlannerStore extends Instance<typeof PlannerStore> {}
 export interface Day extends Instance<typeof Day> {}
 export interface Person extends Instance<typeof Person> {}
 
-const SATURDAY = 6;
-
 const Entity = types.model('Entity', {
 	id: types.optional(types.identifier, guidBuilder.build),
 });

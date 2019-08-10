@@ -1,0 +1,20 @@
+
+.person-cell-text, .person-cell-editor {
+	font-weight: bold;
+	text-align: center;
+	font-size: 15px;
+	width: 100px;
+	margin: 0 auto;
+}
+
+.person-cell {
+	min-width: 120px;
+}
+
+.person-cell-text {
+	cursor: pointer;
+}
+
+.person-cell-editor {
+	height: 20px;
+}
