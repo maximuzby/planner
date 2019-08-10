@@ -1,0 +1,18 @@
+{
+	"search.exclude": {
+		"**/node_modules": true
+	},
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"javascript.preferences.quoteStyle": "single",
+	"typescript.preferences.quoteStyle": "single",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.tslint": true
+	},
+	"tslint.autoFixOnSave": true,
+	"cSpell.words": [
+		"mobx",
+		"onstatechange",
+		"onupdatefound",
+		"unmount"
+	]
+}
