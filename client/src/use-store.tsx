@@ -1,16 +1,19 @@
+import makeInspectable from 'mobx-devtools-mst';
 import { useLocalStore } from 'mobx-react-lite';
 import React from 'react';
 
-import { AppStore } from './store';
+import { PlannerStore } from './store';
 
-const storeContext = React.createContext<AppStore | null>(null);
+const storeContext = React.createContext<PlannerStore | null>(null);
 
 interface StoreProviderProps {
 	children: JSX.Element;
 }
 
 function createStore() {
-	return AppStore.create({ text: 'hello' });
+	const store = PlannerStore.create({});
+	makeInspectable(store);
+	return store;
 }
 
 export const StoreProvider = ({ children }: StoreProviderProps) => {

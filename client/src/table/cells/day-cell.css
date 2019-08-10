@@ -1,0 +1,14 @@
+
+.day-cell-text, .day-cell-editor {
+	font-weight: bold;
+	text-align: center;
+	font-size: 15px;
+}
+
+.day-cell-text {
+	cursor: pointer;
+}
+
+.day-cell-editor {
+	height: 20px;
+}

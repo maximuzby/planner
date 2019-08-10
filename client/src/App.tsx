@@ -1,32 +1,26 @@
-import { useObserver } from 'mobx-react-lite';
-import React, { useCallback } from 'react';
-import './App.css';
-import { StoreProvider, useStore } from './use-store';
+import React from 'react';
 
-const MainPage = () => {
-	const store = useStore();
+import './app.css';
+import { Table } from './table/table';
+import { StoreProvider } from './use-store';
 
-	const onChange = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			store.changeText(event.target.value);
-		},
-		[],
-	);
-
-	return useObserver(() => (
-		<div>
-			<div>{store.text}</div>
-			<div>
-				<input type='text' onChange={onChange} />
-			</div>
+const AppContainer: React.FC = props => {
+	return (
+		<div className='app'>
+			<header className='app__header'>
+				<span className='app__title'>Planner</span>
+			</header>
+			<main className='app__main'>{props.children}</main>
 		</div>
-	));
+	);
 };
 
 export const App: React.FC = () => {
 	return (
 		<StoreProvider>
-			<MainPage />
+			<AppContainer>
+				<Table />
+			</AppContainer>
 		</StoreProvider>
 	);
 };

@@ -10,6 +10,8 @@
 	},
 	"tslint.autoFixOnSave": true,
 	"cSpell.words": [
+		"devtools",
+		"inspectable",
 		"mobx",
 		"onstatechange",
 		"onupdatefound",
