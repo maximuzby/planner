@@ -3,8 +3,8 @@
 }
 
 .planner-cell {
-	margin: 5px;
-	padding: 5px;
+	margin: 2px;
+	padding: 0px;
 }
 
 .planner-cell_header {
@@ -13,12 +13,34 @@
 } 
 
 .planner-card {
-	border-radius: 5px;
-	background-color: #b5c7c2;
 	padding: 10px;
 	height: 60px;
 	width: 150px;
+	margin-top: 5px;
 }
+
+.planner-card.card-task {
+	background-color: #007bff;
+	color: white;
+}
+
+.planner-card.card-task.task-start {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-left-color: white;
+	border-left-style: solid;
+	border-left-width: 2px;
+}
+
+.planner-card.card-task.task-finish {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-right-color: white;
+	border-right-width: 2px;
+	border-right-style: solid;
+}
+
+
 
 .action-button { 
 	background-color: #b5c7c2;
