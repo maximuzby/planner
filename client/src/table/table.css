@@ -9,6 +9,7 @@
 
 .planner-cell_header {
 	height: 28px;
+	width: 150px;
 } 
 
 .planner-card {
@@ -16,7 +17,7 @@
 	background-color: #b5c7c2;
 	padding: 10px;
 	height: 60px;
-	width: 200px;
+	width: 150px;
 }
 
 .action-button { 

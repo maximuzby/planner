@@ -1,17 +1,19 @@
 import React from 'react';
 
-import './app.css';
+import { Container, Navbar, Row } from 'react-bootstrap';
 import { Table } from './table/table';
 import { StoreProvider } from './use-store';
 
 const AppContainer: React.FC = props => {
 	return (
-		<div className='app'>
-			<header className='app__header'>
-				<span className='app__title'>Planner</span>
-			</header>
-			<main className='app__main'>{props.children}</main>
-		</div>
+		<>
+			<Navbar fixed='top' bg='dark' variant='dark' expand='lg'>
+				<Navbar.Brand href='#home'>Planner</Navbar.Brand>
+			</Navbar>
+			<Container fluid={true}>
+				<Row>{props.children}</Row>
+			</Container>
+		</>
 	);
 };
 

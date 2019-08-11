@@ -12,14 +12,6 @@ const Entity = types.model('Entity', {
 	id: types.optional(types.identifier, guidBuilder.build),
 });
 
-export const Person = Entity.named('Person')
-	.props({
-		name: types.string,
-	})
-	.actions(self => ({
-		setName: (name: string) => (self.name = name),
-	}));
-
 export const Day = Entity.named('Day')
 	.props({
 		/** Date in ISO format */
@@ -33,6 +25,25 @@ export const Day = Entity.named('Day')
 	}))
 	.actions(self => ({
 		setTitle: (title: string) => (self.title = title),
+	}));
+
+const Task = Entity.named('Task')
+	.props({
+		name: types.string,
+		day: types.reference(Day),
+	})
+	.actions(self => ({
+		setName: (name: string) => (self.name = name),
+		setDay: (day: Day) => (self.day = day),
+	}));
+
+export const Person = Entity.named('Person')
+	.props({
+		name: types.string,
+		tasks: types.array(Task),
+	})
+	.actions(self => ({
+		setName: (name: string) => (self.name = name),
 	}));
 
 export const PlannerStore = types
@@ -52,7 +63,7 @@ export const PlannerStore = types
 				'day',
 			);
 			self.days.push({
-				title: nextDate.format('dddd, MMM D'),
+				title: nextDate.format('ddd, MMM D'),
 				date: nextDate.format(),
 			});
 		},
@@ -60,16 +71,27 @@ export const PlannerStore = types
 			self.people.push({ name: '' });
 		},
 		afterCreate: () => {
-			self.people = cast([{ name: 'Vasya' }, { name: 'Petya' }]);
-
 			for (let i = 0; i < 7; i++) {
 				const date = moment()
 					.startOf('date')
 					.add(i, 'day');
 				self.days.push({
-					title: date.format('dddd, MMM D'),
+					title: date.format('ddd, MMM D'),
 					date: date.format(),
 				});
 			}
+
+			self.people = cast([
+				{
+					name: 'Vasya',
+					tasks: [
+						{
+							name: 'Vasya Busy',
+							day: self.days[0].id,
+						},
+					],
+				},
+				{ name: 'Petya' },
+			]);
 		},
 	}));
