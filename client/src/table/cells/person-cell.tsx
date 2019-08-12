@@ -1,7 +1,7 @@
 import { useObserver } from 'mobx-react-lite';
 import React from 'react';
 
-import { Person } from '../../store';
+import { Person } from '../../stores/person';
 import { EditableCell } from './editable-cell';
 import './person-cell.css';
 

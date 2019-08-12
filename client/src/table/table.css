@@ -5,6 +5,7 @@
 .planner-cell {
 	margin: 2px;
 	padding: 0px;
+	vertical-align: top;
 }
 
 .planner-cell_header {

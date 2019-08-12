@@ -1,7 +1,7 @@
 import { useObserver } from 'mobx-react-lite';
 import React from 'react';
 
-import { Day } from '../../store';
+import { Day } from '../../stores/day';
 import './day-cell.css';
 import { EditableCell } from './editable-cell';
 

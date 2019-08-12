@@ -2,7 +2,7 @@ import makeInspectable from 'mobx-devtools-mst';
 import { useLocalStore } from 'mobx-react-lite';
 import React from 'react';
 
-import { PlannerStore } from './store';
+import { PlannerStore } from './stores/planner-store';
 
 const storeContext = React.createContext<PlannerStore | null>(null);
 
