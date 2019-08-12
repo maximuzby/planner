@@ -77,15 +77,15 @@ const TaskCardList = (props: {
 
 	return (
 		<>
-			{array.map(placement =>
+			{array.map((placement, i) =>
 				placement ? (
 					<TaskCard
 						dayIndex={dayIndex}
 						task={placement.task}
-						key={placement.task.id}
+						key={i}
 					/>
 				) : (
-					<EmptyCard />
+					<EmptyCard key={i} />
 				),
 			)}
 		</>
