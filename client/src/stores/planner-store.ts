@@ -4,36 +4,16 @@ import moment from 'moment';
 import { Day } from './day';
 import { Person } from './person';
 import { Task } from './task';
+import { getTaskPlacements, TaskPlacement } from './views/task-placements';
 
 export interface PlannerStore extends Instance<typeof PlannerStore> {}
-
-export interface TaskPlacement {
-	position: number;
-	task: Task;
-}
-
-const getTaskPlacements = (tasks: Task[]) => {
-	const placedTasks: TaskPlacement[] = [];
-	tasks.sort((a, b) => a.startDay - b.startDay);
-	for (const task of tasks) {
-		let position = 0;
-		while (
-			placedTasks.find(
-				x => x.position === position && x.task.intersects(task),
-			)
-		) {
-			position++;
-		}
-		placedTasks.push({ task, position });
-	}
-	return placedTasks;
-};
 
 export const PlannerStore = types
 	.model('PlannerApp', {
 		people: types.array(Person),
 		days: types.array(Day),
 		tasks: types.array(Task),
+		selectedTask: types.safeReference(Task),
 	})
 	.views(self => ({
 		getPersonTasks: (person: Person): TaskPlacement[] => {
@@ -50,6 +30,9 @@ export const PlannerStore = types
 		},
 	}))
 	.actions(self => ({
+		selectTask: (task: Task) => {
+			self.selectedTask = task;
+		},
 		removeTask: (task: Task) => {
 			detach(task);
 		},

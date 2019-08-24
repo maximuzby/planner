@@ -23,6 +23,7 @@
 .planner-card.card-task {
 	background-color: #007bff;
 	color: white;
+	cursor: pointer;
 }
 
 .planner-card.card-task.task-start {

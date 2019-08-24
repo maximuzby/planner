@@ -3,9 +3,7 @@ import React, { useCallback } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { Person } from '../../stores/person';
-import { TaskPlacement } from '../../stores/planner-store';
-import { Task } from '../../stores/task';
+import { Person, Task, TaskPlacement } from '../../stores';
 import { useStore } from '../../use-store';
 
 interface DropObject {

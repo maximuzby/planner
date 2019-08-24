@@ -15,6 +15,7 @@
 		"mobx",
 		"onstatechange",
 		"onupdatefound",
+		"unmock",
 		"unmount"
 	]
 }
