@@ -1,6 +1,6 @@
 import { Instance, types } from 'mobx-state-tree';
 
-import { Entity } from './entity';
+import { Entity } from './entity.store';
 
 export interface Person extends Instance<typeof Person> {}
 

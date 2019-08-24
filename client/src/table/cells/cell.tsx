@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useObserver } from 'mobx-react-lite';
 import React, { useCallback } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
@@ -20,6 +21,8 @@ interface TaskCardProps {
 const TaskCard = (props: TaskCardProps) => {
 	const { task, dayIndex } = props;
 
+	const store = useStore();
+
 	const [{ isDragging }, drag] = useDrag({
 		item: { task, type: 'card', fromIndex: dayIndex },
 		collect: monitor => ({
@@ -27,27 +30,41 @@ const TaskCard = (props: TaskCardProps) => {
 		}),
 	});
 
+	const onClick = () => {
+		store.selectTask(task);
+	};
+
+	const onMinusClick = () => {
+		if (!task.decreaseLength()) {
+			store.removeTask(task);
+		}
+	};
+
 	return useObserver(() => (
 		<div
 			ref={drag}
 			style={{ opacity: isDragging ? 0.5 : 1 }}
-			className={`planner-card card-task ${task.starts(dayIndex) &&
-				'task-start'} ${task.finishes(dayIndex) && 'task-finish'}`}
+			className={classNames('planner-card', 'card-task', {
+				'task-start': task.starts(dayIndex),
+				'task-finish': task.finishes(dayIndex),
+				'task-selected': store.selectedTaskId === task.id,
+			})}
+			onClick={onClick}
 		>
 			{task.name}
 			{` `}
-			<ButtonGroup>
+			<ButtonGroup className='task-length-buttons'>
 				<Button
 					size='sm'
-					variant='primary'
+					variant='outline-warning'
 					onClick={task.increaseLength}
 				>
 					+
 				</Button>
 				<Button
 					size='sm'
-					variant='primary'
-					onClick={task.decreaseLength}
+					variant='outline-warning'
+					onClick={onMinusClick}
 				>
 					-
 				</Button>
@@ -67,23 +84,21 @@ const TaskCardList = (props: {
 	const { taskPlacements, dayIndex } = props;
 
 	const maxPosition = Math.max(...taskPlacements.map(x => x.position));
-	const array = Array(maxPosition + 1)
-		.fill(null)
-		.map((_, i) => {
-			return taskPlacements.find(x => x.position === i);
-		});
+	const array = Array.from({ length: maxPosition + 1 }, (_, i) => {
+		return taskPlacements.find(x => x.position === i);
+	});
 
 	return (
 		<>
-			{array.map((placement, i) =>
+			{array.map((placement, index) =>
 				placement ? (
 					<TaskCard
 						dayIndex={dayIndex}
 						task={placement.task}
-						key={i}
+						key={placement.task.id}
 					/>
 				) : (
-					<EmptyCard key={i} />
+					<EmptyCard key={index} />
 				),
 			)}
 		</>

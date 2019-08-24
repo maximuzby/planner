@@ -2,7 +2,7 @@ import { Instance, types } from 'mobx-state-tree';
 import moment from 'moment';
 
 import { dateUtils } from '../utils/date-utils';
-import { Entity } from './entity';
+import { Entity } from './entity.store';
 
 export interface Day extends Instance<typeof Day> {}
 

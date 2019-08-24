@@ -1,8 +1,7 @@
-import { getParentOfType, Instance, types } from 'mobx-state-tree';
+import { Instance, types } from 'mobx-state-tree';
 
-import { Entity } from './entity';
-import { Person } from './person';
-import { PlannerStore } from './planner-store';
+import { Entity } from './entity.store';
+import { Person } from './person.store';
 
 export interface Task extends Instance<typeof Task> {}
 
@@ -48,11 +47,7 @@ export const Task = Entity.named('Task')
 			self.person = person;
 		},
 		increaseLength: () => self.length++,
-		decreaseLength: () => {
-			if (self.length > 1) {
-				self.length--;
-			} else {
-				getParentOfType(self, PlannerStore).removeTask(self as Task);
-			}
+		decreaseLength: (): boolean => {
+			return self.length > 1 ? !!self.length-- : false;
 		},
 	}));

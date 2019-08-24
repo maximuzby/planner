@@ -1,18 +1,19 @@
 import React from 'react';
+import { Col, Container, Navbar, Row } from 'react-bootstrap';
 
-import { Container, Navbar, Row } from 'react-bootstrap';
-import { Table } from './table/table';
+import { AddPersonButton, Table } from './table';
+import { TaskEditor } from './task-editor';
 import { StoreProvider } from './use-store';
 
 const AppContainer: React.FC = props => {
+	const { children } = props;
+
 	return (
 		<>
 			<Navbar fixed='top' bg='dark' variant='dark' expand='lg'>
 				<Navbar.Brand href='#home'>Planner</Navbar.Brand>
 			</Navbar>
-			<Container fluid={true}>
-				<Row>{props.children}</Row>
-			</Container>
+			<Container fluid={true}>{children}</Container>
 		</>
 	);
 };
@@ -22,6 +23,8 @@ export const App: React.FC = () => {
 		<StoreProvider>
 			<AppContainer>
 				<Table />
+				<AddPersonButton />
+				<TaskEditor />
 			</AppContainer>
 		</StoreProvider>
 	);
