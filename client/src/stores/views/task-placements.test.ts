@@ -1,6 +1,6 @@
 import faker from 'faker';
 
-import { Task } from '../task';
+import { Task } from '../task.store';
 import { getTaskPlacements } from './task-placements';
 
 jest.mock('../task');

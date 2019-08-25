@@ -1,7 +1,7 @@
 import faker from 'faker';
 import { types } from 'mobx-state-tree';
 
-import { Task } from './task';
+import { Task } from './task.store';
 
 jest.mock('./person');
 jest.mock('./planner-store');

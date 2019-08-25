@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Day } from './day.store';
 import { seed } from './initial-seed';
 import { Person } from './person.store';
-import { Task } from './task';
+import { Task } from './task.store';
 import { getTaskPlacements, TaskPlacement } from './views/task-placements';
 
 export interface PlannerStoreModel extends Instance<typeof PlannerStoreModel> {}
@@ -34,6 +34,7 @@ const PlannerStoreActions = PlannerStoreView.actions(self => ({
 	selectTask: (task: Task) => {
 		self.selectedTaskId = task.id;
 	},
+})).actions(self => ({
 	removeTask: (task: Task) => {
 		if (task.id === self.selectedTaskId) {
 			self.selectedTaskId = undefined;
@@ -52,16 +53,16 @@ const PlannerStoreActions = PlannerStoreView.actions(self => ({
 		});
 	},
 	addTask: (dayIndex: number, person: Person) => {
-		self.tasks.push(
-			Task.create({
-				person: person.id,
-				startDay: dayIndex,
-				name: 'Task X',
-			}),
-		);
+		const task = Task.create({
+			person: person.id,
+			startDay: dayIndex,
+			name: '',
+		});
+		self.tasks.push(task);
+		self.selectTask(task);
 	},
 	addPerson: () => {
-		self.people.push({ name: ' ' });
+		self.people.push({ name: 'Anonymous' });
 	},
 	/** Fill with test data */
 	afterCreate: () => seed(self),

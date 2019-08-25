@@ -1,12 +1,6 @@
 import { useObserver } from 'mobx-react-lite';
 import React from 'react';
-import {
-	Col,
-	FormControl,
-	FormControlProps,
-	FormGroup,
-	Row,
-} from 'react-bootstrap';
+import { Col, FormControl, FormControlProps, FormGroup } from 'react-bootstrap';
 
 import { Task } from '../stores';
 import { useStore } from '../use-store';
@@ -20,7 +14,11 @@ const TaskEditorControls = (props: { task: Task }) => {
 
 	return useObserver(() => (
 		<FormGroup>
-			<FormControl value={task.name} onChange={setName} />
+			<FormControl
+				autoFocus={true}
+				value={task.name}
+				onChange={setName}
+			/>
 		</FormGroup>
 	));
 };
@@ -29,12 +27,10 @@ export const TaskEditor = () => {
 	const store = useStore();
 
 	return useObserver(() => (
-		<Row>
-			<Col lg='3'>
-				{store.selectedTask && (
-					<TaskEditorControls task={store.selectedTask} />
-				)}
-			</Col>
-		</Row>
+		<Col sm='8' md='6' lg='4'>
+			{store.selectedTask && (
+				<TaskEditorControls task={store.selectedTask} />
+			)}
+		</Col>
 	));
 };

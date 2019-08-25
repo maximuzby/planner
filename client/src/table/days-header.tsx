@@ -16,7 +16,7 @@ export const DaysHeader = () => {
 			))}
 			<th className='planner-cell planner-cell_add'>
 				<Button
-					variant='primary'
+					variant='outline-primary'
 					onClick={store.addDay}
 					title='Add Day'
 				>

@@ -4,6 +4,10 @@ import moment from 'moment';
 import { PlannerStoreModel } from './planner.store';
 
 export const seed = (self: PlannerStoreModel) => {
+	if (self.days.length > 0) {
+		return;
+	}
+
 	for (let i = 0; i < 7; i++) {
 		const date = moment()
 			.startOf('date')
@@ -19,23 +23,5 @@ export const seed = (self: PlannerStoreModel) => {
 			name: 'John',
 		},
 		{ name: 'Max' },
-	]);
-
-	self.tasks = cast([
-		{
-			name: 'Task 1',
-			startDay: 0,
-			person: self.people[0].id,
-		},
-		{
-			name: 'Task 2',
-			startDay: 1,
-			person: self.people[0].id,
-		},
-		{
-			name: 'Task 3',
-			startDay: 1,
-			person: self.people[1].id,
-		},
 	]);
 };
